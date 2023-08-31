@@ -9,6 +9,11 @@
 **Intro**
   
 This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
+
+For example: [Here is my project](http://htmlpreview.github.io/?https://raw.githack.com/AnhBaHumg/se_project_aroundtheus/main/index.html?token=GHSAT0AAAAAACFFOKAPGQVT55J6JV7Y3OG4ZHQAIVA)
+
+- On desktop display: [link](https://vscode.dev/github/AnhBaHumg/se_project_aroundtheus/blob/main/images/desktop.png)
+- On mobile display: [link](https://vscode.dev/github/AnhBaHumg/se_project_aroundtheus/blob/main/images/mobile.png)
   
 **Figma**  
   
