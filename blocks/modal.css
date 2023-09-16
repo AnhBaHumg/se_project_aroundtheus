@@ -1,0 +1,133 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0 19px;
+}
+
+.modal_opened {
+    display: flex;
+}
+
+.modal__container {
+    margin: auto;
+    background-color: #fff;
+    padding: 36px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.modal__close {
+    background-image: url(../images/Close\ Icon.svg);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    bottom: calc(100% + 5px);
+    left: calc(100% + 5px);
+}
+
+.modal__heading {
+    width: 330px;
+    height: 23px;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    margin: 0;
+    font-size: 24px;
+    color: #000;
+    font-style: normal;
+    font-weight: 900;
+}
+
+.modal__form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal__input-title {
+    width: 358px;
+    height: 27.3px;
+    margin-top: 54px;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+.modal__input-description {
+    width: 358px;
+    height: 27.3px;
+    margin-top: 29.74px;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+}
+
+.modal__button {
+    width: 358px;
+    height: 50.2px;
+    margin-top: 48px;
+    background-color: #000;
+    color: #fff;
+    font-family: "Inter", Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 480px) {
+    .modal__container {
+      width: 100%;
+      height: 322px;
+      padding-right: 22px;
+      padding-left: 22px;
+      box-sizing: border-box;
+    }
+  
+    .modal__close {
+      width: 26px;
+      height: 26px;
+      flex-shrink: 0;
+      left: 264px;
+      margin-bottom: 13px;
+      padding: 0;
+    }
+  
+    .modal__heading {
+      width: 330px;
+      color: #000;
+      font-family: "Inter", Arial, Helvetica, sans-serif;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 900;
+      line-height: normal;
+    }
+  
+    .modal__input-title {
+      width: 238px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+  
+    .modal__input-description {
+      width: 238px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+  
+    .modal__button {
+      width: 238px;
+      height: 46px;
+      width: 100%;
+      flex-shrink: 0;
+    }
+  }
