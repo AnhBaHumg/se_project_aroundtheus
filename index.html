@@ -44,22 +44,22 @@
           </footer>
           <div class="modal" id="profile-edit-modal">
             <div class="modal__container">
-              <button class="modal__close" id="profile-close-button"></button>
-              <p class="modal__heading">Edit Profile</p>
+              <button type="button" class="modal__close" id="profile-close-button"></button>
+              <h1 class="modal__heading">Edit Profile</h1>
                 <form class="modal__form">
                   <input 
                     type="text" 
                     name="title" 
                     id="profile-title-input"
-                    class="modal__input-title"
+                    class="modal__input-title js-profile-title"
                     placeholder="Name">
                   <input 
                     type="text" 
                     name="description"
                     id="profile-description-input"
-                    class="modal__input-description"
+                    class="modal__input-description js-profile-description"
                     placeholder="Description">
-                  <button class="modal__button">Save</button>
+                  <button type="submit" class="modal__button">Save</button>
                 </form>
             </div>
           </div>
