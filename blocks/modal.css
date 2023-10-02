@@ -12,6 +12,8 @@
 
 .modal_opened {
     display: flex;
+    visibility: visible;
+    opacity: 1;
 }
 
 .modal__container {
@@ -87,6 +89,7 @@
     margin: auto;
     position: relative;
 }
+
 .modal__title-popup {
     width: 291px;
     height: 12px;
