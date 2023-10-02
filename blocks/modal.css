@@ -83,6 +83,24 @@
     line-height: 22px;
 }
 
+.modal__container-popup {
+    margin: auto;
+    position: relative;
+}
+.modal__title-popup {
+    width: 291px;
+    height: 12px;
+    bottom: -22px;
+    margin: 0;
+    color: #fff;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    position: absolute;
+}
+
 @media screen and (max-width: 480px) {
     .modal__container {
       width: 100%;
