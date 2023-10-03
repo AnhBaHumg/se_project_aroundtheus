@@ -1,49 +1,54 @@
 const initialCards = [
-    {
-        name: "Yosemite Valley",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-    },
-    {
-        name: "Lake Louise",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-    },
-    {
-        name: "Bald Mountains",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-    },
-    {
-        name: "Latemar",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-    },
-    {
-        name: "Vanoise National Park",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-    },
-    {
-        name: "Lago di Braies",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
-    }
+  {
+    name: "Yosemite Valley",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+  },
+  {
+    name: "Lake Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+  },
 ];
 
-const cardTemplate = document.querySelector("#card-template").content.firstElementChild;
+const cardTemplate =
+  document.querySelector("#card-template").content.firstElementChild;
 
 //Wrappers
-const cardListEl = document.querySelector('.cards__list');
-const profileEditModal = document.querySelector('#profile-edit-modal');
-const addCardModal = document.querySelector('#add-card-modal');
+const cardListEl = document.querySelector(".cards__list");
+const profileEditModal = document.querySelector("#profile-edit-modal");
+const addCardModal = document.querySelector("#add-card-modal");
 const profileEditForm = addCardModal.querySelector(".modal__form");
 
 //Buttons and other Dom nodes
-const profileEditButton = document.querySelector('#profile-edit-button');
-const profileCloseButton = profileEditModal.querySelector('#profile-close-button');
-const addCardCloseButton = addCardModal.querySelector('#addcard-close-button');
-const profileTitle = document.querySelector('.profile__title');
-const profileDescription = document.querySelector('.profile__description');
-const addNewCardButton = document.querySelector('.profile__add-button');
+const profileEditButton = document.querySelector("#profile-edit-button");
+const profileCloseButton = profileEditModal.querySelector(
+  "#profile-close-button"
+);
+const addCardCloseButton = addCardModal.querySelector("#addcard-close-button");
+const profileTitle = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
+const addNewCardButton = document.querySelector(".profile__add-button");
 
 //Form data
-const profileTitleInput = document.querySelector('#profile-title-input');
-const profileDescriptionInput = document.querySelector('#profile-description-input');
+const profileTitleInput = document.querySelector("#profile-title-input");
+const profileDescriptionInput = document.querySelector(
+  "#profile-description-input"
+);
 const cardTitleInput = profileEditForm.querySelector(".modal__input_title");
 const cardUrlInput = profileEditForm.querySelector(".modal__input_description");
 
@@ -51,74 +56,80 @@ const cardUrlInput = profileEditForm.querySelector(".modal__input_description");
 const popupImageModal = document.querySelector("#image-popup");
 const popupImage = document.querySelector(".modal__image-popup");
 const popupImageTitle = document.querySelector(".modal__title-popup");
-const popupImageModalClose = document.querySelector("#image-popup-close-button");
+const popupImageModalClose = document.querySelector(
+  "#image-popup-close-button"
+);
 
 function closeModal(modal) {
-    modal.classList.remove("modal_opened");
+  modal.classList.remove("modal_opened");
 }
 
 function openModal(modal) {
-    modal.classList.add("modal_opened");
+  modal.classList.add("modal_opened");
 }
 
 function getCardElement(cardData) {
-    const cardElement = cardTemplate.cloneNode(true);
-    const cardImageEl = cardElement.querySelector(".card__image");
-    const cardTitleEl = cardElement.querySelector(".card__name");
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImageEl = cardElement.querySelector(".card__image");
+  const cardTitleEl = cardElement.querySelector(".card__name");
 
-    const likeButton = cardElement.querySelector(".card__like-button");
-        likeButton.addEventListener("click", () => {
-        likeButton.classList.toggle("card__like-button-active");
-    });
+  const likeButton = cardElement.querySelector(".card__like-button");
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button-active");
+  });
 
-    const trashButton = cardElement.querySelector(".card__trash-button");
-    trashButton.addEventListener("click", () => {
+  const trashButton = cardElement.querySelector(".card__trash-button");
+  trashButton.addEventListener("click", () => {
     cardElement.remove();
-    });
+  });
 
-    cardImageEl.src = cardData.link;
-    cardImageEl.alt = cardData.name;
-    cardTitleEl.textContent = cardData.name;
+  cardImageEl.src = cardData.link;
+  cardImageEl.alt = cardData.name;
+  cardTitleEl.textContent = cardData.name;
 
-    cardImageEl.addEventListener("click", function () {
-        popupImage.src = cardData.link;
-        popupImage.alt = cardData.name;
-        popupImageTitle.textContent = cardData.name;
-        openModal(popupImageModal);
-      });
+  cardImageEl.addEventListener("click", function () {
+    popupImage.src = cardData.link;
+    popupImage.alt = cardData.name;
+    popupImageTitle.textContent = cardData.name;
+    openModal(popupImageModal);
+  });
 
-    return cardElement;
+  return cardElement;
 }
 
 function renderCard(cardData, cardListEl) {
-    const cardElement = getCardElement(cardData);
-    cardListEl.prepend(cardElement);
-  }
+  const cardElement = getCardElement(cardData);
+  cardListEl.prepend(cardElement);
+}
 
 function handleProfileEditSubmit(e) {
-    e.preventDefault();
-    profileTitle.textContent = profileTitleInput.value;
-    profileDescription.textContent = profileDescriptionInput.value;
-    closeModal(profileEditModal);
+  e.preventDefault();
+  profileTitle.textContent = profileTitleInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  closeModal(profileEditModal);
 }
 
 function handleProfileAddSubmit(e) {
-    e.preventDefault();
-    const name = cardTitleInput.value;
-    const link = cardUrlInput.value;
-    renderCard({ name, link }, cardListEl);
-    closeModal(addCardModal);
-    profileEditForm.reset();
+  e.preventDefault();
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  renderCard({ name, link }, cardListEl);
+  closeModal(addCardModal);
+  profileEditForm.reset();
 }
 
-profileEditButton.addEventListener('click', () => {
-    profileTitleInput.value = profileTitle.textContent;
-    profileDescriptionInput.value = profileDescription.textContent;
-    openModal(profileEditModal);
+profileEditButton.addEventListener("click", () => {
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+  openModal(profileEditModal);
 });
 
-popupImageModalClose.addEventListener("click", () => closeModal(popupImageModal));
-profileCloseButton.addEventListener("click", () => closeModal(profileEditModal));
+popupImageModalClose.addEventListener("click", () =>
+  closeModal(popupImageModal)
+);
+profileCloseButton.addEventListener("click", () =>
+  closeModal(profileEditModal)
+);
 profileEditModal.addEventListener("submit", handleProfileEditSubmit);
 profileEditForm.addEventListener("submit", handleProfileAddSubmit);
 //add new card button
