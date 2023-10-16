@@ -62,8 +62,8 @@ const popupImageModalClose = document.querySelector(
 );
 
 function closeByEscape(evt) {
-  const modal = document.querySelector('.modal_opened');
   if (evt.key === "Escape") {
+    const modal = document.querySelector('.modal_opened');
     closeModal(modal);
   }
 }
@@ -152,9 +152,6 @@ const modals = document.querySelectorAll(".modal");
 
 modals.forEach((modal) => {
   modal.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("modal")) {
-      closeModal(modal);
-    }
     if (evt.target.classList.contains('modal_opened')) {
       closeModal(modal);
   }
