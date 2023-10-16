@@ -49,8 +49,9 @@ const profileTitleInput = document.querySelector("#profile-title-input");
 const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
-const cardTitleInput = cardForm.querySelector(".modal__input_title");
-const cardUrlInput = cardForm.querySelector(".modal__input_description");
+
+const cardTitleInput = cardForm.querySelector("#title-card-input");
+const cardUrlInput = cardForm.querySelector("#url-image-input");
 
 //Immage popup
 const popupImageModal = document.querySelector("#image-popup");
@@ -137,3 +138,13 @@ addNewCardButton.addEventListener("click", () => openModal(addCardModal));
 addCardCloseButton.addEventListener("click", () => closeModal(addCardModal));
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+
+const modals = document.querySelectorAll(".modal");
+
+modals.forEach((modal) => {
+  modal.addEventListener("click", (evt) => {
+    if (evt.target.classList.contains("modal")) {
+      closePopup(modal);
+    }
+  });
+});

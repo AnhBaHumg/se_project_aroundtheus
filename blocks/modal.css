@@ -11,7 +11,6 @@
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s linear 0.5s,opacity 0.5s linear;
-
 }
 
 .modal_opened {
@@ -117,6 +116,31 @@
 .modal__image-popup {
   max-width: 75vw;
   max-height: 75vh;
+}
+
+.modal__button_disabled {
+  opacity: 0.2;
+}
+
+.modal__error {
+  font-family: "Inter", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: normal;
+  color: #ff0000;
+  position: relative;
+  display: flex;
+  inline-size: 358px;
+  overflow-wrap: break-word;
+}
+
+.modal__input_type_error {
+  border-bottom-color: #ff0000;
+  border-bottom-width: 1px;
+}
+
+.modal__label {
+  position: relative;
 }
 
 @media screen and (max-width: 480px) {
