@@ -61,17 +61,21 @@ const popupImageModalClose = document.querySelector(
   "#image-popup-close-button"
 );
 
+function closeByEscape(evt) {
+  const modal = document.querySelector('.modal_opened');
+  if (evt.key === "Escape") {
+    closeModal(modal);
+  }
+}
+
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", (evt) => {
-    if (evt.key === "Escape") {
-      closeModal(modal);
-    }
-  });
+  document.addEventListener('keydown', closeByEscape);
 }
 
 function getCardElement(cardData) {
@@ -130,26 +134,32 @@ profileEditButton.addEventListener("click", () => {
   openModal(profileEditModal);
 });
 
-popupImageModalClose.addEventListener("click", () =>
-  closeModal(popupImageModal)
-);
-profileCloseButton.addEventListener("click", () =>
-  closeModal(profileEditModal)
-);
+// popupImageModalClose.addEventListener("click", () =>
+//   closeModal(popupImageModal)
+// );
+// profileCloseButton.addEventListener("click", () =>
+//   closeModal(profileEditModal)
+// );
 profileEditModal.addEventListener("submit", handleProfileEditSubmit);
 cardForm.addEventListener("submit", handleProfileAddSubmit);
 //add new card button
 addNewCardButton.addEventListener("click", () => openModal(addCardModal));
-addCardCloseButton.addEventListener("click", () => closeModal(addCardModal));
+// addCardCloseButton.addEventListener("click", () => closeModal(addCardModal));
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
 const modals = document.querySelectorAll(".modal");
 
 modals.forEach((modal) => {
-  modal.addEventListener("click", (evt) => {
+  modal.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("modal")) {
       closeModal(modal);
     }
+    if (evt.target.classList.contains('modal_opened')) {
+      closeModal(modal);
+  }
+    if (evt.target.classList.contains('modal__close')) {
+      closeModal(modal);
+  }
   });
 });
