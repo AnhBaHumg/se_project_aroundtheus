@@ -67,6 +67,11 @@ function closeModal(modal) {
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", (evt) => {
+    if (evt.key === "Escape") {
+      closeModal(modal);
+    }
+  });
 }
 
 function getCardElement(cardData) {
@@ -144,7 +149,7 @@ const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
   modal.addEventListener("click", (evt) => {
     if (evt.target.classList.contains("modal")) {
-      closePopup(modal);
+      closeModal(modal);
     }
   });
 });
