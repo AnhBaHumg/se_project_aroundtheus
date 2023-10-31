@@ -43,8 +43,8 @@ const cardData = {
 };
 
 //Templates
-const cardTemplate =
-  document.querySelector("#card-template").content.firstElementChild;
+// const cardTemplate =
+//   document.querySelector("#card-template").content.firstElementChild;
 
 //Wrappers
 const cardListEl = document.querySelector(".cards__list");
@@ -87,9 +87,9 @@ function openModal(modal) {
   document.addEventListener('keydown', closeByEscape);
 }
 
-function renderCard(data) {
-  const cardElement = new Card(data, "#card-template", handleImageClick);
-  cardListEl.prepend(cardElement.getView());
+function renderCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImageClick);
+  return card.getView();
 }
 
 // function getCardElement(cardData) {
@@ -146,19 +146,20 @@ function handleAddCardFormSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
-  renderCard({ name, link });
+  const cardEl = renderCard({ name, link }, cardListEl);
+  cardListEl.prepend(cardEl)
   closeModal(addCardModal);
   e.target.reset();
 }
 
 function handleImageClick() {
   const popupModal = document.querySelector("#image-popup");
-  const popupImage = previewModal.querySelector("#modal-image-popup");
-  const popupTitle = previewModal.querySelector("#modal-title-popup");
+  const popupImage = popupModal.querySelector("#modal-image-popup");
+  const popupTitle = popupModal.querySelector("#modal-title-popup");
 
   openModal(popupModal);
   popupImage.src = this._link;
-  popupTitle.alt = this._name;
+  popupImage.alt = this._name;
   popupTitle.textContent = this._name;
 }
 
@@ -174,7 +175,10 @@ cardForm.addEventListener("submit", handleAddCardFormSubmit);
 //add new card button
 addNewCardButton.addEventListener("click", () => openModal(addCardModal));
 
-initialCards.forEach(renderCard);
+initialCards.forEach((data) => {
+  const cardEl = renderCard(data, cardListEl)
+  cardListEl.prepend(cardEl);
+});
 
 const modals = document.querySelectorAll(".modal");
 
