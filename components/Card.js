@@ -1,11 +1,9 @@
 export default class Card {
-    constructor({ name, link }, cardSelector, handleImageClick, handleLikeIcon, handleDeleteCard) {
+    constructor({ name, link }, cardSelector, handleImageClick) {
         this._name = name;
         this._link = link;
         this._cardSelector = cardSelector;
         this._handleImageClick = handleImageClick;
-        this._handleLikeIcon = handleLikeIcon;
-        this._handleDeleteCard = handleDeleteCard;
     }
 
     _setEventListeners() {
@@ -18,7 +16,7 @@ export default class Card {
             this._handleDeleteCard();
         });
         //.card__image
-        this._cardElement.querySelector(".card__image").addEventListener("click", () => {
+        this._cardImageEl.addEventListener("click", () => {
             this._handleImageClick(this);
         });
     }
@@ -36,14 +34,13 @@ export default class Card {
     }
 
     getView() {
-        const cardData = { link: this._link, name: this._name };
         this._cardElement = document.querySelector(this._cardSelector).content.querySelector(".card").cloneNode(true);
         //get the card view
-        const cardImageEL = this._cardElement.querySelector(".card__image");
-        cardImageEL.src = this._link;
-        cardImageEL.alt = this._name;
-        const cardTitleEL = this._cardElement.querySelector(".card__name");
-        cardTitleEL.textContent = cardData.name;
+        this._cardTitleEl = this._cardElement.querySelector(".card__name");
+        this._cardImageEl = this._cardElement.querySelector(".card__image");
+        this._cardImageEl.alt = this._name;
+        this._cardImageEl.src = this._link;
+        this._cardTitleEl.textContent = this._name;
         //set event listeners
         this._setEventListeners();
         //return the card
