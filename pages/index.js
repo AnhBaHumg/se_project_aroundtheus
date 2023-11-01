@@ -37,17 +37,12 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-//Delete this the popupImage will not works
-const cardData = {  
-  name: "Yosemite Valley", 
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg", 
-}; 
 
 //Wrappers
 const cardListEl = document.querySelector(".cards__list");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const addCardModal = document.querySelector("#add-card-modal");
-const cardForm = document.querySelector(".modal__form");
+const cardForm = addCardModal.querySelector(".modal__form");
 
 
 //Buttons and other Dom nodes
@@ -104,15 +99,15 @@ function handleAddCardFormSubmit(e) {
   e.target.reset(); 
 }
 
-function handleImageClick() {
+function handleImageClick(link, name) {
   const popupModal = document.querySelector("#image-popup");
   const popupImage = popupModal.querySelector("#modal-image-popup");
   const popupTitle = popupModal.querySelector("#modal-title-popup");
 
   openModal(popupModal);
-  popupImage.src = cardData.link;
-  popupImage.alt = cardData.name;
-  popupTitle.textContent = cardData.name;
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupTitle.textContent = name;
 }
 
 profileEditButton.addEventListener("click", () => {
