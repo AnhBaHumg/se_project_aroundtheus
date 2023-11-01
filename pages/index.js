@@ -63,6 +63,9 @@ const cardTitleInput = cardForm.querySelector("#title-card-input");
 const cardUrlInput = cardForm.querySelector("#url-image-input");
 
 //Immage popup
+const popupModal = document.querySelector("#image-popup");
+const popupImage = popupModal.querySelector("#modal-image-popup");
+const popupTitle = popupModal.querySelector("#modal-title-popup");
 const popupImageModalClose = document.querySelector(
   "#image-popup-close-button"
 );
@@ -100,10 +103,6 @@ function handleAddCardFormSubmit(e) {
 }
 
 function handleImageClick(link, name) {
-  const popupModal = document.querySelector("#image-popup");
-  const popupImage = popupModal.querySelector("#modal-image-popup");
-  const popupTitle = popupModal.querySelector("#modal-title-popup");
-
   openModal(popupModal);
   popupImage.src = link;
   popupImage.alt = name;
