@@ -29,9 +29,6 @@ export default class Card {
         this._cardElement.remove();
         this._cardElement = null;
     }
-    _handleImageClick() {
-        this._cardElement.querySelector(".card__image").classList.add("modal_opened");
-    }
 
     getView() {
         this._cardElement = document.querySelector(this._cardSelector).content.querySelector(".card").cloneNode(true);
