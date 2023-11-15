@@ -26,7 +26,7 @@ function renderCard(cardData) {
 function handleAddCardFormSubmit(inputValues) {
   renderCard(inputValues);
   variable.addCardForm.reset();
-  cardFormFormValidator.changeButtonState();
+  cardFormFormValidator._changeButtonState();
   formPopup.close();
 }
 
