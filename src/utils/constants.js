@@ -33,7 +33,7 @@ export const config = {
     inputErrorClass: "modal__input_type_error",
     errorClass: "modal__error_visible",
 };
-const addCardModal = document.querySelector("#add-card-modal");
+export const addCardModal = document.querySelector("#add-card-modal");
 export const cardForm = addCardModal.querySelector(".modal__form");
 export const profileEditModal = document.querySelector("#profile-edit-modal");
 export const variable = {

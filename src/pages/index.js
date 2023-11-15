@@ -11,6 +11,7 @@ import {
   variable,
   cardForm,
   profileEditModal,
+  addCardModal
 } from "../utils/constants.js";
 
 function handleImageClick(cardData) {
@@ -24,16 +25,13 @@ function renderCard(cardData) {
 
 function handleAddCardFormSubmit(inputValues) {
   renderCard(inputValues);
-  variable.addCardModal.reset();
+  addCardModal.reset();
   cardFormFormValidator.changeButtonState();
   formPopup.close();
 }
 
 //FormValidator
-const profileEditModalFormValidator = new FormValidator(
-  profileEditModal,
-  config
-);
+const profileEditModalFormValidator = new FormValidator(profileEditModal,config);
 const cardFormFormValidator = new FormValidator(cardForm, config);
 
 profileEditModalFormValidator.enableValidation();
