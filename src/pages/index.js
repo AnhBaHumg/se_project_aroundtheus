@@ -6,98 +6,84 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import Section from "../components/Section.js";
-import { initialCards, config } from "../utils/constants.js";
+import { initialCards, config, variable } from "../utils/constants.js";
 
-
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener('keydown', closeByEscape);
-}
-
-function openModal(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener('keydown', closeByEscape);
+function handleImageClick (cardData) {
+  popupWithImage.open(cardData);
 }
 
 function renderCard(cardData) {
   const card = new Card(cardData, "#card-template", handleImageClick);
-  return card.getView(); 
+  section.addItem(card.getView()); 
 }
 
-function handleProfileEditSubmit(e) {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closeModal(profileEditModal);
+function handleAddCardFormSubmit(inputValues) {
+  renderCard(inputValues);
+  variable.addCardModal.reset();
+  cardFormFormValidator.toggleButtonState();
+  formPopup.close();
 }
-
-function handleAddCardFormSubmit(e) {
-  e.preventDefault();
-  const name = cardTitleInput.value;
-  const link = cardUrlInput.value;
-  const cardEl = renderCard({ name, link }, cardListEl); 
-  cardListEl.prepend(cardEl) 
-  closeModal(addCardModal); 
-  e.target.reset(); 
-}
-
-function handleImageClick(link, name) {
-  openModal(popupModal);
-  popupImage.src = link;
-  popupImage.alt = name;
-  popupTitle.textContent = name;
-}
-
-profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  openModal(profileEditModal);
-});
-
-
-profileEditModal.addEventListener("submit", handleProfileEditSubmit);
-cardForm.addEventListener("submit", handleAddCardFormSubmit);
-//add new card button
-addNewCardButton.addEventListener("click", () => openModal(addCardModal));
-
-initialCards.forEach((data) => { 
-  const cardEl = renderCard(data, cardListEl) 
-  cardListEl.prepend(cardEl); 
-});
-
-const modals = document.querySelectorAll(".modal");
-
-modals.forEach((modal) => {
-  modal.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains('modal_opened')) {
-      closeModal(modal);
-  }
-    if (evt.target.classList.contains('modal__close')) {
-      closeModal(modal);
-  }
-  });
-});
-
-function closeByEscape(evt) {
-  if (evt.key === "Escape") {
-    const modal = document.querySelector('.modal_opened');
-    closeModal(modal);
-  }
-}
-
-
 
 //FormValidator
-const profileEditModalFormValidator = new FormValidator(profileEditModal, config);
-const cardFormFormValidator = new FormValidator(cardForm, config);
+const profileEditModalFormValidator = new FormValidator(variable.profileEditModal, config);
+const cardFormFormValidator = new FormValidator(variable.cardForm, config);
 
 profileEditModalFormValidator.enableValidation();
 cardFormFormValidator.enableValidation();
 
 //PopupWithForm
 
+const formPopup = new PopupWithForm(variable.addCardModal, handleAddCardFormSubmit);
+
+function openAddForm() {
+  formPopup.open();
+}
+
+formPopup.setEventListeners();
+
+const editPopup = new PopupWithForm(
+  variable.profileEditModal,
+  handleProfileEditSubmit
+);
+
+function openEditForm() {
+  const user = userInfo.getUserInfo();
+  variable.profileTitleInput.value = user.name;
+  variable.profileDescriptionInput.value = user.description;
+  editPopup.open();
+}
+
+editPopup.setEventListeners();
+
+variable.profileEditButton.addEventListener("click", () => {
+  openEditForm();
+});
+
+variable.addNewCardButton.addEventListener("click", () =>
+  openAddForm()
+);
+
+
+
 //PopupWithImage
 
-//Section
+const popupWithImage = new PopupWithImage("#image-popup");
+popupWithImage.setEventListeners();
 
+//Section
+const section = new Section({
+  items: initialCards,
+  renderer: (cardData) => {
+    renderCard(cardData);
+  },
+},
+"cards__list");
+
+section.renderItems();
 //UserInfo
+
+const userInfo = new UserInfo(".profile__title", ".profile__description");
+function handleProfileEditSubmit(inputValues) {
+  userInfo.setUserInfo(inputValues.name, inputValues.description);
+  editPopup.close();
+}

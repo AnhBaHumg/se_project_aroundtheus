@@ -1,46 +1,50 @@
 export default class Card {
-    constructor({ name, link }, cardSelector, handleImageClick) {
-        this._name = name;
-        this._link = link;
+    constructor(data, cardSelector, handleImageClick) {
+        this._name = data.name;
+        this._link = data.link;
         this._cardSelector = cardSelector;
         this._handleImageClick = handleImageClick;
     }
 
+    _getTemplate() {
+        const cardElement = document.querySelector(this._cardSelector).content.querySelector(".card").cloneNode(true);
+          return cardElement;
+    }
+
     _setEventListeners() {
         //.card__like-button
-        this._cardElement.querySelector(".card__like-button").addEventListener("click", () => {
-            this._handleLikeIcon();
-        });
+        this._likeButton.addEventListener("click", this._handleLikeIcon);
+        
         //.card__trash-button
-        this._cardElement.querySelector(".card__trash-button").addEventListener("click", () => {
-            this._handleDeleteCard();
-        });
+        this._cardTrash.addEventListener("click", this._handleDeleteCard);
+        
         //.card__image
         this._cardImageEl.addEventListener("click", () => {
-            this._handleImageClick(this._link, this._name);
+            this._handleImageClick({ link: this._link,name: this._name });
         });
     }
 
     _handleLikeIcon() {
-        this._cardElement
-          .querySelector(".card__like-button").classList.toggle("card__like-button-active");
+        this._likeButton.classList.toggle("card__like-button-active");
     }
     _handleDeleteCard() {
-        this._cardElement.remove();
-        this._cardElement = null;
+        this._element.remove();
+        this._element = null;
     }
 
     getView() {
-        this._cardElement = document.querySelector(this._cardSelector).content.querySelector(".card").cloneNode(true);
+        this._element = this._getTemplate();
+        this._likeButton = this._element.querySelector(".card__like-button");
+        this._cardTrash = this._element.querySelector(".card__trash-button");
         //get the card view
         this._cardTitleEl = this._cardElement.querySelector(".card__name");
         this._cardImageEl = this._cardElement.querySelector(".card__image");
-        this._cardImageEl.alt = this._name;
+        this._cardImageEl.alt = `Photo of ${this._name}`;
         this._cardImageEl.src = this._link;
         this._cardTitleEl.textContent = this._name;
         //set event listeners
         this._setEventListeners();
         //return the card
-        return this._cardElement;
+        return this._element;
     }
 }

@@ -34,31 +34,34 @@ export const config = {
     errorClass: "modal__error_visible",
 };
 
+export const variable = {
+
 //Wrappers
-export const cardListEl = document.querySelector(".cards__list");
-export const profileEditModal = document.querySelector("#profile-edit-modal");
-export const addCardModal = document.querySelector("#add-card-modal");
-export const cardForm = addCardModal.querySelector(".modal__form");
+cardListEl: document.querySelector(".cards__list"),
+profileEditModal: document.querySelector("#profile-edit-modal"),
+addCardModal: document.querySelector("#add-card-modal"),
+cardForm: ".modal__form",
 
 
 //Buttons and other Dom nodes
-export const profileEditButton = document.querySelector("#profile-edit-button");
-export const profileCloseButton = profileEditModal.querySelector("#profile-close-button");
-export const addCardCloseButton = addCardModal.querySelector("#addcard-close-button");
-export const profileTitle = document.querySelector(".profile__title");
-export const profileDescription = document.querySelector(".profile__description");
-export const addNewCardButton = document.querySelector(".profile__add-button");
+profileEditButton: document.querySelector("#profile-edit-button"),
+profileCloseButton: "#profile-close-button",
+addCardCloseButton: "#addcard-close-button",
+profileTitle: document.querySelector(".profile__title"),
+profileDescription: document.querySelector(".profile__description"),
+addNewCardButton: document.querySelector(".profile__add-button"),
 
 //Form data
-export const profileTitleInput = document.querySelector("#profile-title-input");
-export const profileDescriptionInput = document.querySelector("#profile-description-input");
+profileTitleInput: document.querySelector("#profile-title-input"),
+profileDescriptionInput: document.querySelector("#profile-description-input"),
 
-export const cardTitleInput = cardForm.querySelector("#title-card-input");
-export const cardUrlInput = cardForm.querySelector("#url-image-input");
+cardTitleInput: "#title-card-input",
+cardUrlInput: "#url-image-input",
 
 //Immage popup
-export const popupModal = document.querySelector("#image-popup");
-export const popupImage = popupModal.querySelector("#modal-image-popup");
-export const popupTitle = popupModal.querySelector("#modal-title-popup");
-export const popupImageModalClose = document.querySelector("#image-popup-close-button");
+popupModal: document.querySelector("#image-popup"),
+popupImage: "#modal-image-popup",
+popupTitle: "#modal-title-popup",
+popupImageModalClose: document.querySelector("#image-popup-close-button"),
 
+}
