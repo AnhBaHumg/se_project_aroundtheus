@@ -39,7 +39,7 @@ export const profileEditModal = document.querySelector("#profile-edit-modal");
 export const variable = {
 //Wrappers
 cardListEl: document.querySelector(".cards__list"),
-
+addCardForm: document.querySelector("#add-card-form"),
 
 
 
