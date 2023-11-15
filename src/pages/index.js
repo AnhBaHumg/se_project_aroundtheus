@@ -18,16 +18,21 @@ function handleImageClick(cardData) {
   popupWithImage.open(cardData);
 }
 
+function createCard(item) {
+  const cardElement = new Card(item, "#card-template", handleImageClick);
+  return cardElement.getView()
+}
+
 function renderCard(cardData) {
-  const card = new Card(cardData, "#card-template", handleImageClick);
-  section.addItem(card.getView());
+  const card = createCard(cardData);
+  section.addItem(card);
 }
 
 function handleAddCardFormSubmit(inputValues) {
   renderCard(inputValues);
   variable.addCardForm.reset();
-  cardFormFormValidator._changeButtonState();
-  formPopup.close();
+  cardFormFormValidator.changeButtonState();
+  cardPopup.close();
 }
 
 //FormValidator
@@ -39,13 +44,13 @@ cardFormFormValidator.enableValidation();
 
 //PopupWithForm
 
-const formPopup = new PopupWithForm("#add-card-modal", handleAddCardFormSubmit);
+const cardPopup = new PopupWithForm("#add-card-modal", handleAddCardFormSubmit);
 
 function openAddForm() {
-  formPopup.open();
+  cardPopup.open();
 }
 
-formPopup.setEventListeners();
+cardPopup.setEventListeners();
 
 const editPopup = new PopupWithForm(
   "#profile-edit-modal",
@@ -61,11 +66,10 @@ function openEditForm() {
 
 editPopup.setEventListeners();
 
-variable.profileEditButton.addEventListener("click", () => {
-  openEditForm();
-});
 
-variable.addNewCardButton.addEventListener("click", () => openAddForm());
+variable.profileEditButton.addEventListener("click", openEditForm);
+
+variable.addNewCardButton.addEventListener("click", openAddForm); 
 
 //PopupWithImage
 
