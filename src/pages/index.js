@@ -10,8 +10,7 @@ import {
   config,
   variable,
   cardForm,
-  profileEditModal,
-  addCardModal
+  profileEditModal
 } from "../utils/constants.js";
 
 function handleImageClick(cardData) {
