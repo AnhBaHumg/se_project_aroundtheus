@@ -32,6 +32,7 @@ export const config = {
     inactiveButtonClass: "modal__button_disabled",
     inputErrorClass: "modal__input_type_error",
     errorClass: "modal__error_visible",
+    
 };
 export const addCardModal = document.querySelector("#add-card-modal");
 export const cardForm = addCardModal.querySelector(".modal__form");
@@ -64,5 +65,5 @@ popupModal: document.querySelector("#image-popup"),
 popupImage: "#modal-image-popup",
 popupTitle: "#modal-title-popup",
 popupImageModalClose: document.querySelector("#image-popup-close-button"),
-
+deleteCardPopup: "#delete-card-modal",
 }
