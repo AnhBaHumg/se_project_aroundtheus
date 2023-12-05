@@ -144,7 +144,7 @@ const updateAvatarForm = new PopupWithForm("#profile-image-modal", handleAvatarS
 function handleAvatarSubmit(inputValues) {
   updateAvatarForm.setLoading(true);
   api.updateAvatar(inputValues.link).then((user) => {
-    userInfo.setAvatar(user);
+    userInfo.setAvatar(user.avatar);
     updateAvatarForm.setLoading(false);
   });
   updateAvatarForm.close();
