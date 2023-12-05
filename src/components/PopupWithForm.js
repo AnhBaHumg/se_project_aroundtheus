@@ -39,14 +39,4 @@ export default class PopupWithForm extends Popup {
         }
     }
 
-    renderLoading() {
-        const img = document.createElement("img");
-        img.src = imageSrc;
-        return img;
-    }
-
-    loadImage() {
-        this.image = image;
-        this._popupForm.append(image);
-    }
 }

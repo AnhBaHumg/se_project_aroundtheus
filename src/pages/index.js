@@ -114,7 +114,7 @@ api
 api
 .getUserInfo()
   .then((user) => {
-    userInfo.setUserInfo(user.name, user.description);
+    userInfo.setUserInfo(user.name, user.about);
     userInfo.setAvatar(user.avatar);
   })
   .catch((err) => {
@@ -138,6 +138,25 @@ function handleProfileEditSubmit(inputValues) {
   });
 }
 
+//EditAvatar
+
+const updateAvatarForm = new PopupWithForm("#profile-image-modal", handleAvatarSubmit);
+function handleAvatarSubmit(inputValues) {
+  updateAvatarForm.setLoading(true);
+  api.updateAvatar(inputValues.link).then((user) => {
+    userInfo.setAvatar(user);
+    updateAvatarForm.setLoading(false);
+  });
+  updateAvatarForm.close();
+}
+
+const editPencilIcon = document.querySelector("#avatar-edit-button");
+
+editPencilIcon.addEventListener("click", () => {
+  updateAvatarForm.open();
+});
+
+updateAvatarForm.setEventListeners();
 //PopupWithConfirmation
 
 const deleteCardPopup = new PopupWithConfirmation("#delete-card-modal");
@@ -161,31 +180,7 @@ function handleDeleteButton(cardID, card) {
 
 deleteCardPopup.setEventListeners();
 
-//EditAvatar
 
-const updateAvatarForm = new PopupWithForm("#profile-image-modal", (avatar) => {
-  updateAvatarForm.setLoading(true);
-  api
-    .updateAvatar(avatar.link)
-    .then((user) => {
-      userInfo.setAvatar(user.avatar);
-      updateAvatarForm.close();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-    .finally(() => {
-      updateAvatarForm.setLoading(false);
-    });
-});
-
-const editPencilIcon = document.querySelector("#avatar-edit-button");
-
-editPencilIcon.addEventListener("click", () => {
-  updateAvatarForm.open();
-});
-
-updateAvatarForm.setEventListeners();
 
 //addCard
 
@@ -195,22 +190,13 @@ const cardPopup = new PopupWithForm("#add-card-modal", handleAddCardFormSubmit);
 //   const card = createCard(cardData);
 // }
 
-function handleAddCardFormSubmit(cardData) {
+function handleAddCardFormSubmit(inputValues) {
   cardPopup.setLoading(true);
-  api
-    .addNewCard(cardData)
-    .then((res) => {
-      const card = renderCard(res);
-      variable.addCardForm.reset();
-      cardFormFormValidator.changeButtonState();
-      cardPopup.close();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
-
-    .finally(() => {
-      cardPopup.setLoading(false);
-    });
+  api.addNewCard(inputValues).then((card) => {
+    const cardEl = renderCard(card);
+    section.addItem(cardEl);
+    cardPopup.close();
+    cardPopup.setLoading(false);
+  });
 }
 cardPopup.setEventListeners();

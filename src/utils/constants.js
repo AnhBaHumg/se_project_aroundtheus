@@ -52,6 +52,7 @@ addCardCloseButton: "#addcard-close-button",
 profileTitle: document.querySelector(".profile__title"),
 profileDescription: document.querySelector(".profile__description"),
 addNewCardButton: document.querySelector(".profile__add-button"),
+avatarCloseButton: document.querySelector("#update-avatar-close-button"),
 
 //Form data
 profileTitleInput: document.querySelector("#profile-title-input"),
