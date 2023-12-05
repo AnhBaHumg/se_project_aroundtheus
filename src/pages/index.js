@@ -141,8 +141,8 @@ function handleAvatarSubmit(inputValues) {
   api.updateAvatar(inputValues.link).then((user) => {
     userInfo.setAvatar(user.avatar);
     updateAvatarForm.setLoading(false);
+    updateAvatarForm.close();
   });
-  updateAvatarForm.close();
 }
 
 const editPencilIcon = document.querySelector("#avatar-edit-button");
