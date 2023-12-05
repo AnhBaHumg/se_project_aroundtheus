@@ -48,14 +48,14 @@ function handleLikeClick(card) {
     api
       .removeLike(card._id)
       .then(() => {
-        card.handleLikeIcon();
+        card.updateLikes();
       })
       .catch((err) => console.error(err));
   } else {
     api
       .likeCard(card._id)
       .then(() => {
-        card.handleLikeIcon();
+        card.updateLikes(card._id);
       })
       .catch((err) => console.error(err));
   }
@@ -128,13 +128,8 @@ function handleProfileEditSubmit(inputValues) {
   editPopup.setLoading(true);
   api.editUserInfo(inputValues).then(() => {
     userInfo.setUserInfo(inputValues.name, inputValues.description);
-    editPopup.close();
-  })
-  .catch((err) => {
-    console.error(err);
-  })
-  .finally(() => {
     editPopup.setLoading(false);
+    editPopup.close();
   });
 }
 
@@ -161,19 +156,12 @@ updateAvatarForm.setEventListeners();
 
 const deleteCardPopup = new PopupWithConfirmation("#delete-card-modal");
 
-function handleDeleteButton(cardID, card) {
+function handleDeleteButton(card) {
   deleteCardPopup.open();
   deleteCardPopup.setSubmitAction(() => {
-    api
-      .deleteCard(cardID)
-      .then(() => {
-        card.handleDeleteCard();
-        deleteCardPopup.close();
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
+    api.deleteCard(card._id).then(() => {
+      card.handleDeleteCard();
+      deleteCardPopup.close();
       });
   });
 }
