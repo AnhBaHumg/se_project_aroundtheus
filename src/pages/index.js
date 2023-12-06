@@ -161,15 +161,11 @@ function handleAvatarSubmit(avatar) {
     });
 }
 
-variable.avatarEditButton.addEventListener("click", () => {
-  updateAvatarForm.open();
-  editAvatarFormValidator.changeButtonState();
-});
-
 const editPencilIcon = document.querySelector("#avatar-edit-button");
 
 editPencilIcon.addEventListener("click", () => {
   updateAvatarForm.open();
+  editAvatarFormValidator.changeButtonState();
 });
 
 updateAvatarForm.setEventListeners();
