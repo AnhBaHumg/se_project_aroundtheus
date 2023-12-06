@@ -9,6 +9,7 @@ import Api from "../components/Api.js"
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import {
   initialCards,
+  addCardModal,
   avatarForm,
   config,
   variable,
@@ -198,13 +199,26 @@ const cardPopup = new PopupWithForm("#add-card-modal", handleAddCardFormSubmit);
 //   const card = createCard(cardData);
 // }
 
-function handleAddCardFormSubmit(inputValues) {
+function handleAddCardFormSubmit(item) {
   cardPopup.setLoading(true);
-  api.addNewCard(inputValues).then((card) => {
-    const cardEl = renderCard(card);
-    section.addItem(cardEl);
-    cardPopup.close();
-    cardPopup.setLoading(false);
-  });
+  api
+    .addNewCard(item)
+    .then((res) => {
+      const card = renderCard(res);
+      section.addItem(card);
+      cardPopup.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      cardPopup.setLoading(false);
+    });
 }
+
+variable.addNewCardButton.addEventListener("click", () => {
+  cardPopup.open();
+  cardFormFormValidator.changeButtonState();
+});
+
 cardPopup.setEventListeners();

@@ -37,7 +37,7 @@ export const config = {
 export const addCardModal = document.querySelector("#add-card-modal");
 export const cardForm = addCardModal.querySelector(".modal__form");
 export const profileEditModal = document.querySelector("#profile-edit-modal");
-export const avatarForm = document.querySelector(".profile__image");
+export const avatarForm = document.querySelector("#edit-avatar-form");
 export const variable = {
 //Wrappers
 cardListEl: document.querySelector(".cards__list"),
