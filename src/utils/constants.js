@@ -32,10 +32,12 @@ export const config = {
     inactiveButtonClass: "modal__button_disabled",
     inputErrorClass: "modal__input_type_error",
     errorClass: "modal__error_visible",
+    
 };
 export const addCardModal = document.querySelector("#add-card-modal");
 export const cardForm = addCardModal.querySelector(".modal__form");
 export const profileEditModal = document.querySelector("#profile-edit-modal");
+export const avatarForm = document.querySelector("#edit-avatar-form");
 export const variable = {
 //Wrappers
 cardListEl: document.querySelector(".cards__list"),
@@ -51,6 +53,7 @@ addCardCloseButton: "#addcard-close-button",
 profileTitle: document.querySelector(".profile__title"),
 profileDescription: document.querySelector(".profile__description"),
 addNewCardButton: document.querySelector(".profile__add-button"),
+avatarCloseButton: document.querySelector("#update-avatar-close-button"),
 
 //Form data
 profileTitleInput: document.querySelector("#profile-title-input"),
@@ -64,5 +67,5 @@ popupModal: document.querySelector("#image-popup"),
 popupImage: "#modal-image-popup",
 popupTitle: "#modal-title-popup",
 popupImageModalClose: document.querySelector("#image-popup-close-button"),
-
+deleteCardPopup: "#delete-card-modal",
 }

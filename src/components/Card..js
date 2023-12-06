@@ -1,9 +1,14 @@
 export default class Card {
-  constructor(data, cardSelector, handleImageClick) {
+  constructor(data, cardSelector, handleImageClick, handleDeleteSubmit, handleLikeClick) {
     this._name = data.name;
     this._link = data.link;
+    this._cardID = data.cardID;
+    this._id = data._id;
+    this.isLiked = data.isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteSubmit = handleDeleteSubmit;
+    this._handleLikeClick = handleLikeClick;
   }
 
   _getTemplate() {
@@ -16,10 +21,15 @@ export default class Card {
 
   _setEventListeners() {
     //.card__like-button
-    this._likeButton.addEventListener("click", this._handleLikeIcon);
+    this._likeButton.addEventListener("click", () => {
+      this._handleLikeClick(this);
+    });
+
 
     //.card__trash-button
-    this._cardTrash.addEventListener("click", this._handleDeleteCard);
+    this._cardTrash.addEventListener("click", () => {
+      this._handleDeleteSubmit(this._id, this);
+    });
 
     //.card__image
     this._cardImageEl.addEventListener("click", () => {
@@ -27,10 +37,25 @@ export default class Card {
     });
   }
 
-  _handleLikeIcon = () => {
-    this._likeButton.classList.toggle("card__like-button-active");
-  };
-  _handleDeleteCard = () => {
+  _setLikes() {
+    if (this.isLiked) {
+      this._likeButton.classList.add("card__like-button-active");
+    } else {
+      this._likeButton.classList.remove("card__like-button-active");
+    }
+  }
+
+  handleDeleteSubmit() {
+    const cardID = this.cardData;
+    handleDeleteButton(cardID);
+  }
+
+  updateLikes(isLiked) {
+    this.isLiked = isLiked;
+    this._setLikes();
+  }
+
+  handleDeleteCard() {
     this._element.remove();
     this._element = null;
   }
@@ -41,13 +66,16 @@ export default class Card {
     this._cardTrash = this._element.querySelector(".card__trash-button");
     this._cardImageEl = this._element.querySelector(".card__image");
     //get the card view
-    
     this._cardImageEl.src = this._link;
     this._cardImageEl.alt = `Photo of ${this._name}`;
     this._element.querySelector(".card__name").textContent = this._name;
+    this._setLikes();
     //set event listeners
     this._setEventListeners();
     //return the card
     return this._element;
+  }
+  getID() {
+    return this._id();
   }
 }
