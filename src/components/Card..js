@@ -28,17 +28,13 @@ export default class Card {
 
     //.card__trash-button
     this._cardTrash.addEventListener("click", () => {
-      this._handleDeleteSubmit(this);
+      this._handleDeleteSubmit(this._id, this);
     });
 
     //.card__image
     this._cardImageEl.addEventListener("click", () => {
       this._handleImageClick({ name: this._name, link: this._link });
     });
-  }
-
-  isLiked() {
-    return this.isLiked;
   }
 
   _setLikes() {

@@ -9,6 +9,7 @@ import Api from "../components/Api.js"
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import {
   initialCards,
+  avatarForm,
   config,
   variable,
   cardForm,
@@ -36,11 +37,13 @@ function renderCard(item) {
 
 
 //FormValidator
-const profileEditModalFormValidator = new FormValidator(profileEditModal,config);
+const profileEditModalFormValidator = new FormValidator(profileEditModal, config);
 const cardFormFormValidator = new FormValidator(cardForm, config);
+const editAvatarFormValidator = new FormValidator(avatarForm, config);
 
 profileEditModalFormValidator.enableValidation();
 cardFormFormValidator.enableValidation();
+editAvatarFormValidator.enableValidation();
 
 //LikeCard
 function handleLikeClick(card) {
@@ -128,21 +131,33 @@ function handleProfileEditSubmit(inputValues) {
   editPopup.setLoading(true);
   api.editUserInfo(inputValues).then(() => {
     userInfo.setUserInfo(inputValues.name, inputValues.description);
-    editPopup.setLoading(false);
     editPopup.close();
+  })
+  .catch((err) => {
+    console.error(err);
+  })
+  .finally(() => {
+    editPopup.setLoading(false);
   });
 }
 
 //EditAvatar
 
 const updateAvatarForm = new PopupWithForm("#profile-image-modal", handleAvatarSubmit);
-function handleAvatarSubmit(inputValues) {
+function handleAvatarSubmit(avatar) {
   updateAvatarForm.setLoading(true);
-  api.updateAvatar(inputValues.link).then((user) => {
-    userInfo.setAvatar(user.avatar);
-    updateAvatarForm.setLoading(false);
-    updateAvatarForm.close();
-  });
+  api
+    .updateAvatar(avatar.link)
+    .then((user) => {
+      userInfo.setAvatar(user.avatar);
+      updateAvatarForm.close();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+    .finally(() => {
+      updateAvatarForm.setLoading(false);
+    });
 }
 
 const editPencilIcon = document.querySelector("#avatar-edit-button");
@@ -156,13 +171,18 @@ updateAvatarForm.setEventListeners();
 
 const deleteCardPopup = new PopupWithConfirmation("#delete-card-modal");
 
-function handleDeleteButton(card) {
+function handleDeleteButton(cardID, card) {
   deleteCardPopup.open();
   deleteCardPopup.setSubmitAction(() => {
-    api.deleteCard(card._id).then(() => {
-      card.handleDeleteCard();
-      deleteCardPopup.close();
-      });
+    api
+      .deleteCard(cardID)
+      .then(() => {
+        card.handleDeleteCard();
+        deleteCardPopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   });
 }
 
